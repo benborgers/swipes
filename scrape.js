@@ -29,7 +29,7 @@ const octokit = new Octokit({ auth: GIST_TOKEN });
   await octokit.rest.gists.update({
     gist_id: "f87b1fb5b39209697c156bded77fe23d",
     files: {
-      "swipes.txt": {
+      "swipes.json": {
         content: JSON.stringify(
           {
             swipesLeft: swipes,
