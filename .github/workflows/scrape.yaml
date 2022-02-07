@@ -1,0 +1,21 @@
+name: Scrape
+
+on:
+  push:
+  schedule:
+    # In UTC
+    - cron: "*/15 13-23,0-2 * * *" # Run every 15 mins 8am - 9pm (while dining is open).
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+          cache: "npm"
+      - run: npm install
+      - run: node scrape.js
+        env:
+          JUMBOCASH_PASSWORD: ${{ secrets.JUMBOCASH_PASSWORD }}
