@@ -7,7 +7,7 @@ export default function () {
 
   useEffect(() => {
     fetch(
-      "https://gist.githubusercontent.com/benborgers/f87b1fb5b39209697c156bded77fe23d/raw/swipes.json"
+      `https://gist.githubusercontent.com/benborgers/f87b1fb5b39209697c156bded77fe23d/raw/swipes.json?v=${new Date().getTime()}`
     )
       .then((res) => res.json())
       .then((json) => setData(json));
