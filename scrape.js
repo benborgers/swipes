@@ -2,6 +2,8 @@
 const JUMBOCASH_PASSWORD = process.env.JUMBOCASH_PASSWORD;
 
 const puppeteer = require("puppeteer");
+const { Octokit } = require("@octokit/action");
+const octokit = Octokit();
 
 (async () => {
   const browser = await puppeteer.launch({
@@ -23,6 +25,13 @@ const puppeteer = require("puppeteer");
   );
   const swipes = parseInt(rawSwipes.replace("Current Balance", "").trim());
   console.log(`${swipes} swipes left`);
+
+  await octokit.rest.gists.update({
+    gist_id: "f87b1fb5b39209697c156bded77fe23d",
+    files: {
+      "swipes.txt": swipes,
+    },
+  });
 
   await page.close();
   await browser.close();

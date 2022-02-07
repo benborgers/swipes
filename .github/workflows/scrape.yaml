@@ -19,3 +19,4 @@ jobs:
       - run: node scrape.js
         env:
           JUMBOCASH_PASSWORD: ${{ secrets.JUMBOCASH_PASSWORD }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
