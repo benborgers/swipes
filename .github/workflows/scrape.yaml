@@ -7,7 +7,7 @@ on:
     - cron: "*/15 13-23,0-2 * * *" # Run every 15 mins 8am - 9pm (while dining is open).
 
 jobs:
-  push:
+  scrape:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
