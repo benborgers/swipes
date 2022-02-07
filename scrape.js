@@ -1,10 +1,10 @@
 // This file scrapes the JumboCash portal for how many meal swipes I’ve used.
 const JUMBOCASH_PASSWORD = process.env.JUMBOCASH_PASSWORD;
-const GITHUB_GIST_TOKEN = process.env.GIST_TOKEN;
+const GIST_TOKEN = process.env.GIST_TOKEN;
 
 const puppeteer = require("puppeteer");
 const { Octokit } = require("octokit");
-const octokit = new Octokit({ auth: GITHUB_GIST_TOKEN });
+const octokit = new Octokit({ auth: GIST_TOKEN });
 
 (async () => {
   const browser = await puppeteer.launch({
