@@ -1,7 +1,6 @@
 name: Scrape
 
 on:
-  push:
   schedule:
     # In UTC
     - cron: "*/15 13-23,0-2 * * *" # Run every 15 mins 8am - 9pm (while dining is open).
@@ -19,4 +18,4 @@ jobs:
       - run: node scrape.js
         env:
           JUMBOCASH_PASSWORD: ${{ secrets.JUMBOCASH_PASSWORD }}
-          GITHUB_GIST_TOKEN: ${{ secrets.GITHUB_GIST_TOKEN }}
+          GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
