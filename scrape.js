@@ -3,7 +3,7 @@ const JUMBOCASH_PASSWORD = process.env.JUMBOCASH_PASSWORD;
 
 const puppeteer = require("puppeteer");
 const { Octokit } = require("@octokit/action");
-const octokit = Octokit();
+const octokit = new Octokit();
 
 (async () => {
   const browser = await puppeteer.launch({
