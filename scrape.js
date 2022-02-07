@@ -1,9 +1,12 @@
 // This file scrapes the JumboCash portal for how many meal swipes I’ve used.
 const JUMBOCASH_PASSWORD = process.env.JUMBOCASH_PASSWORD;
+const GITHUB_GIST_TOKEN = process.env.GIST_TOKEN;
+
+const GIST_ID = "f87b1fb5b39209697c156bded77fe23d";
 
 const puppeteer = require("puppeteer");
-const { Octokit } = require("@octokit/action");
-const octokit = new Octokit();
+const { Octokit } = require("octokit");
+const octokit = new Octokit({ auth: GITHUB_GIST_TOKEN });
 
 (async () => {
   const browser = await puppeteer.launch({
@@ -24,17 +27,26 @@ const octokit = new Octokit();
     () => document.querySelector("table:last-of-type tbody .sr-only").innerText
   );
   const swipes = parseInt(rawSwipes.replace("Current Balance", "").trim());
-  console.log(`${swipes} swipes left`);
 
-  await octokit.rest.gists.update({
-    gist_id: "f87b1fb5b39209697c156bded77fe23d",
-    files: [
-      {
-        filename: "swipes.txt",
-        content: swipes,
+  const currentSwipesData = await octokit.rest.gists.get({ gist_id: GIST_ID });
+  const currentSwipes = Number(
+    currentSwipesData.data.files["swipes.txt"].content
+  );
+
+  if (swipes !== currentSwipes) {
+    console.log(`Gist updated to ${swipes} swipes left.`);
+
+    await octokit.rest.gists.update({
+      gist_id: GIST_ID,
+      files: {
+        "swipes.txt": {
+          content: swipes.toString(),
+        },
       },
-    ],
-  });
+    });
+  } else {
+    console.log(`Gist is already up to date (${swipes} swipes left).`);
+  }
 
   await page.close();
   await browser.close();
