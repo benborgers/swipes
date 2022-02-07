@@ -28,25 +28,19 @@ const octokit = new Octokit({ auth: GITHUB_GIST_TOKEN });
   );
   const swipes = parseInt(rawSwipes.replace("Current Balance", "").trim());
 
-  const currentSwipesData = await octokit.rest.gists.get({ gist_id: GIST_ID });
-  const currentSwipes = Number(
-    currentSwipesData.data.files["swipes.txt"].content
-  );
-
-  if (swipes !== currentSwipes) {
-    console.log(`Gist updated to ${swipes} swipes left.`);
-
-    await octokit.rest.gists.update({
-      gist_id: GIST_ID,
-      files: {
-        "swipes.txt": {
-          content: swipes.toString(),
-        },
+  await octokit.rest.gists.update({
+    gist_id: GIST_ID,
+    files: {
+      "swipes.txt": {
+        content: JSON.stringify({
+          swipesLeft: swipes,
+          timestamp: new Date().getTime(),
+        }),
       },
-    });
-  } else {
-    console.log(`Gist is already up to date (${swipes} swipes left).`);
-  }
+    },
+  });
+
+  console.log(`Gist updated to ${swipes} swipes left.`);
 
   await page.close();
   await browser.close();
