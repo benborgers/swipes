@@ -32,10 +32,14 @@ const octokit = new Octokit({ auth: GITHUB_GIST_TOKEN });
     gist_id: GIST_ID,
     files: {
       "swipes.txt": {
-        content: JSON.stringify({
-          swipesLeft: swipes,
-          timestamp: new Date().getTime(),
-        }),
+        content: JSON.stringify(
+          {
+            swipesLeft: swipes,
+            timestamp: new Date().getTime(),
+          },
+          null,
+          2
+        ),
       },
     },
   });
