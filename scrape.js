@@ -2,8 +2,6 @@
 const JUMBOCASH_PASSWORD = process.env.JUMBOCASH_PASSWORD;
 const GITHUB_GIST_TOKEN = process.env.GIST_TOKEN;
 
-const GIST_ID = "f87b1fb5b39209697c156bded77fe23d";
-
 const puppeteer = require("puppeteer");
 const { Octokit } = require("octokit");
 const octokit = new Octokit({ auth: GITHUB_GIST_TOKEN });
@@ -29,7 +27,7 @@ const octokit = new Octokit({ auth: GITHUB_GIST_TOKEN });
   const swipes = parseInt(rawSwipes.replace("Current Balance", "").trim());
 
   await octokit.rest.gists.update({
-    gist_id: GIST_ID,
+    gist_id: "f87b1fb5b39209697c156bded77fe23d",
     files: {
       "swipes.txt": {
         content: JSON.stringify(
