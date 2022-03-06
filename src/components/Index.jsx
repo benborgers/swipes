@@ -24,7 +24,7 @@ export default function () {
     { zone: "America/New_York" }
   );
   const END_OF_SEMESTER = DateTime.fromObject(
-    { year: 2022, month: 5, day: 13 },
+    { year: 2022, month: 5, day: 6 },
     { zone: "America/New_York" }
   );
 
