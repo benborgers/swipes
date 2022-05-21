@@ -11,7 +11,9 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig(
-/** @type {import('astro').AstroUserConfig} */
-{
-  integrations: [react(), tailwind()]
-});
+  /** @type {import('astro').AstroUserConfig} */
+  {
+    base: "/swipes",
+    integrations: [react(), tailwind()],
+  }
+);
