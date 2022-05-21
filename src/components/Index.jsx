@@ -1,20 +1,9 @@
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { DateTime } from "luxon";
 
 export default function () {
-  const [data, setData] = useState({ swipesLeft: 400 });
-
-  useEffect(() => {
-    fetch(
-      `https://gist.githubusercontent.com/benborgers/f87b1fb5b39209697c156bded77fe23d/raw/swipes.json?v=${new Date().getTime()}`
-    )
-      .then((res) => res.json())
-      .then((json) => setData(json));
-  }, []);
-
   // CALCULATING USED SWIPES
-  const percentUsed = ((400 - data.swipesLeft) / 400) * 100;
+  const percentUsed = 100;
 
   // CALCULATING IDEAL SWIPES
   const now = DateTime.now();
@@ -72,13 +61,25 @@ export default function () {
 
   return (
     <div className="p-4 sm:p-6 h-screen grid grid-rows-[max-content,max-content,1fr]">
-      <div className="max-w-xl">
-        <h1 className="font-black text-3xl sm:text-5xl sm:leading-tight text-transparent bg-clip-text bg-gradient-to-br from-slate-900 to-slate-600">
-          I used all of my ridiculously many meal swipes.
-        </h1>
-        <h2 className="mt-2 text-slate-400 font-semibold">
-          This will result in me buying a lot of granola bars.
-        </h2>
+      <div className="max-w-xl text-xl space-y-4 text-cyan-900/80">
+        <p>
+          For my freshman spring semester at Tufts, I made it my mission to use
+          all 400 of my meal swipes on the Premium meal plan that freshmen are
+          required to have.
+        </p>
+        <p>I built this dashboard to help me stay on track.</p>
+        <p>
+          <span>You can </span>
+          <a
+            href="https://benborgers.com/posts/swipes-postmortem"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline"
+          >
+            read the story on my blog
+          </a>
+          .
+        </p>
       </div>
 
       <div className="mt-8 space-y-4 sm:space-y-8">
@@ -96,7 +97,7 @@ export default function () {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.25 }}
           >
-            swipes used so far ({400 - data.swipesLeft}/400)
+            swipes used so far (400/400)
           </motion.p>
         </div>
 
@@ -126,23 +127,9 @@ export default function () {
       </div>
 
       <div className="self-end flex flex-col sm:flex-row items-end justify-between gap-1">
-        {data?.timestamp ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="bg-red-500 text-white text-sm font-medium px-3 py-0.5 rounded-full flex items-center gap-2"
-          >
-            <div className="relative h-2 w-2">
-              <div className="absolute inset-0 bg-white/90 rounded-full" />
-              <div className="absolute inset-0 bg-white/90 rounded-full animate-ping" />
-            </div>
-            <p>
-              last checked {DateTime.fromMillis(data.timestamp).toRelative()}
-            </p>
-          </motion.div>
-        ) : (
-          <div />
-        )}
+        <div className="font-mono font-bold text-sm uppercase bg-red-100 text-red-600 px-3 py-0.5 rounded-full">
+          January 2022 — May 2022
+        </div>
 
         <p className="text-right text-slate-500">
           An aspirational project by{" "}
