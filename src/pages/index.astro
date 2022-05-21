@@ -8,6 +8,14 @@ import Index from '../components/Index.jsx'
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <script>
+    // Redirect from benborgers.com/swipes to benborgers.com/swipes/,
+    // so that proxied paths for assets work.
+    if (!location.pathname.endsWith('/')) {
+      location = location.pathname + '/'
+    }
+  </script>
+
   <style is:global>
     @import "../styles/global.css";
   </style>
