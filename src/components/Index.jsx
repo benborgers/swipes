@@ -77,7 +77,7 @@ export default function () {
             rel="noopener noreferrer"
             className="underline"
           >
-            read the story on my blog
+            read the full story on my blog
           </a>
           .
         </p>
