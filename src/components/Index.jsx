@@ -74,7 +74,7 @@ export default function () {
     <div className="p-4 sm:p-6 h-screen grid grid-rows-[max-content,max-content,1fr]">
       <div className="max-w-xl">
         <h1 className="font-black text-3xl sm:text-5xl sm:leading-tight text-transparent bg-clip-text bg-gradient-to-br from-slate-900 to-slate-600">
-          I want to use all of my ridiculously many meal swipes this semester.
+          I used all of my ridiculously many meal swipes.
         </h1>
         <h2 className="mt-2 text-slate-400 font-semibold">
           This will result in me buying a lot of granola bars.
